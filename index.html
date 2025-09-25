@@ -3,159 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Disaster Watch Dashboard - Government of India</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+    <title>Advanced Weather & Calamity Analysis with Google Maps</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header class="header">
-        <div class="header-content">
-            <div class="gov-emblem">
-                <div class="emblem-icon">
-                    <i class="fas fa-dharmachakra"></i>
-                </div>
-                <div class="title-section">
-                    <h1>Disaster Watch Dashboard</h1>
-                    <p class="subtitle">Government of India | Emergency Response System</p>
-                </div>
-            </div>
-            <div class="alert-status">
-                <div class="status-indicator"></div>
-                <span>System Active</span>
-            </div>
+    <div id="map"></div>
+
+    <div class="ui-panel">
+        <div class="panel-header">
+            <h3>Weather & Safety Dashboard</h3>
         </div>
-    </header>
+        
+        <div class="panel-section">
+            <button class="disaster-button" id="disasterBtn">
+                <i class="fas fa-shield-alt"></i> Find Nearest Safe Place
+            </button>
+        </div>
 
-    <div class="main-container">
-        <div class="dashboard-grid">
-            <div class="map-container">
-                <h3 class="map-title"><i class="fas fa-map-marked-alt"></i> Live Disaster Risk Map</h3>
-                <div id="map"></div>
-            </div>
-
-            <div class="control-panel">
-                <div class="panel-section">
-                    <h4 class="panel-title">
-                        <i class="fas fa-cloud-sun"></i> Current Weather
-                    </h4>
-                    <div class="weather-info">
-                        <div class="weather-item">
-                            <div class="weather-value" id="temperature">--°C</div>
-                            <div class="weather-label">Temperature</div>
-                        </div>
-                        <div class="weather-item">
-                            <div class="weather-value" id="humidity">--%</div>
-                            <div class="weather-label">Humidity</div>
-                        </div>
-                        <div class="weather-item">
-                            <div class="weather-value" id="pressure">-- hPa</div>
-                            <div class="weather-label">Pressure</div>
-                        </div>
-                        <div class="weather-item">
-                            <div class="weather-value" id="rainfall">-- mm</div>
-                            <div class="weather-label">Rainfall</div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="panel-section">
-                    <h4 class="panel-title">
-                        <i class="fas fa-exclamation-triangle"></i> 24-Hour Risk Level
-                    </h4>
-                    <div class="risk-indicator">
-                        <div class="risk-level" id="riskLevel">MODERATE</div>
-                        <div id="riskDescription">Monitor weather conditions</div>
-                    </div>
-                </div>
-
-                <div class="panel-section">
-                    <h4 class="panel-title">
-                        <i class="fas fa-ambulance"></i> Emergency Actions
-                    </h4>
-                    <div class="emergency-buttons">
-                        <button class="sos-button" onclick="triggerSOS()">
-                            <i class="fas fa-exclamation-circle"></i>
-                            EMERGENCY SOS
-                        </button>
-                        <button class="location-button" onclick="getCurrentLocation()">
-                            <i class="fas fa-location-arrow"></i>
-                            Find My Location
-                        </button>
-                    </div>
-                </div>
-
-                <div class="panel-section">
-                    <h4 class="panel-title">
-                        <i class="fas fa-hospital"></i> Nearby Emergency Services
-                    </h4>
-                    <div id="emergencyServices">
-                        <div style="padding: 1rem; background: #f8f9fa; border-radius: 8px;">
-                            <div style="font-weight: 600;">Loading nearby services...</div>
-                        </div>
-                    </div>
-                </div>
+        <div class="panel-section">
+            <h4>Current Conditions</h4>
+            <div class="weather-grid">
+                <div class="weather-item"><span><i class="fas fa-thermometer-half"></i> Temp</span><strong id="temperature">--</strong></div>
+                <div class="weather-item"><span><i class="fas fa-tint"></i> Humidity</span><strong id="humidity">--</strong></div>
+                <div class="weather-item"><span><i class="fas fa-compress-arrows-alt"></i> Pressure</span><strong id="pressure">--</strong></div>
+                <div class="weather-item"><span><i class="fas fa-cloud-showers-heavy"></i> Rain (1h)</span><strong id="rainfall">--</strong></div>
             </div>
         </div>
 
-        <div class="alerts-panel">
-            <h3 style="margin-bottom: 1rem; color: #2c3e50;">
-                <i class="fas fa-bell"></i> Active Alerts & Notifications
-            </h3>
-            <div id="alertsContainer">
-                <div class="alert-item">
-                    <i class="fas fa-info-circle"></i>
-                    <div>
-                        <strong>Weather Advisory:</strong> Heavy rainfall expected in coastal regions for next 24 hours.
-                    </div>
-                </div>
+        <div class="panel-section risk-section">
+            <h4>Risk Analysis</h4>
+            <p id="riskDescription">Click the button above to start.</p>
+        </div>
+
+        <div class="panel-section">
+            <h4>Recommended Safe Place</h4>
+            <div id="safePlaceResult">
+                Click the "Find Nearest Safe Place" button to get a recommendation.
             </div>
         </div>
     </div>
 
-    <div class="tutorial-overlay" id="tutorialOverlay">
-        <div class="tutorial-content">
-            <div class="tutorial-step active" data-step="1">
-                <h3>Welcome to Disaster Watch Dashboard</h3>
-                <p>This is the live map of India. Tap any location to see weather conditions and disaster risks in real-time.</p>
-                <i class="fas fa-map-marked-alt" style="font-size: 3rem; color: #3742fa; margin: 1rem 0;"></i>
-            </div>
-            
-            <div class="tutorial-step" data-step="2">
-                <h3>Emergency Services</h3>
-                <p>You can view nearby shelters, hospitals, fire stations, and helplines. All emergency contacts are automatically updated based on your location.</p>
-                <i class="fas fa-hospital" style="font-size: 3rem; color: #ff4757; margin: 1rem 0;"></i>
-            </div>
-            
-            <div class="tutorial-step" data-step="3">
-                <h3>Real-time Alerts</h3>
-                <p>If disaster alerts are triggered, you'll receive warnings in English and your local language with sound notifications.</p>
-                <i class="fas fa-bell" style="font-size: 3rem; color: #ffa726; margin: 1rem 0;"></i>
-            </div>
-            
-            <div class="tutorial-step" data-step="4">
-                <h3>Emergency SOS</h3>
-                <p>Tap the SOS button to immediately call an ambulance and share your live location with emergency services.</p>
-                <i class="fas fa-ambulance" style="font-size: 3rem; color: #ff6b6b; margin: 1rem 0;"></i>
-            </div>
-            
-            <div class="tutorial-step" data-step="5">
-                <h3>24-Hour Risk Prediction</h3>
-                <p>Our system analyzes weather patterns and historical data to predict disaster risks for the next 24 hours with color-coded alerts.</p>
-                <i class="fas fa-chart-line" style="font-size: 3rem; color: #2ecc71; margin: 1rem 0;"></i>
-            </div>
-            
-            <div class="tutorial-buttons">
-                <button class="btn btn-secondary" onclick="skipTutorial()">Skip Tutorial</button>
-                <div>
-                    <button class="btn btn-secondary" onclick="previousStep()" id="prevBtn" style="display: none;">Previous</button>
-                    <button class="btn btn-primary" onclick="nextStep()" id="nextBtn">Next</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBGoiCTYEubnIQgi38BkfibqxkEv5-R-3E&libraries=places&callback=initMap" async defer></script>
+    
     <script src="script.js"></script>
 </body>
 </html>
