@@ -92,14 +92,20 @@ body {
 .map-container {
     background: white;
     border-radius: 15px;
-    padding: 1rem;
     box-shadow: 0 8px 32px rgba(0,0,0,0.1);
     backdrop-filter: blur(10px);
+    overflow: hidden; /* Ensures children conform to the border-radius */
+    display: flex;
+    flex-direction: column;
+}
+
+.map-title {
+    padding: 1rem 1rem 0 1rem;
 }
 
 #map {
-    height: 500px;
-    border-radius: 10px;
+    flex-grow: 1; /* Allows the map to fill the available space */
+    min-height: 500px; /* Ensures a minimum height */
 }
 
 .control-panel {

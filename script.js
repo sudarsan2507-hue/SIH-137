@@ -1,6 +1,7 @@
 // Global variables
 let map;
 let userMarker;
+let clickedLocationMarker; // To keep track of the last clicked marker
 let currentStep = 1;
 const totalSteps = 5;
 let weatherData = {};
@@ -118,7 +119,13 @@ function addUserMarker(lat, lng) {
 
 // Add location marker
 function addLocationMarker(lat, lng) {
-    L.marker([lat, lng], {
+    // If a marker from a previous click exists, remove it
+    if (clickedLocationMarker) {
+        map.removeLayer(clickedLocationMarker);
+    }
+
+    // Add the new marker and store it
+    clickedLocationMarker = L.marker([lat, lng], {
         icon: L.divIcon({
             html: '<i class="fas fa-map-marker-alt" style="color: #ff4757; font-size: 20px;"></i>',
             className: 'location-marker',
