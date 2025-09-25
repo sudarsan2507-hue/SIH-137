@@ -1,46 +1,64 @@
-/* Add these new styles to your existing style.css file */
+/* All previous styles remain the same */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+:root {
+    --primary-color: #3742fa;
+    --danger-color: #D32F2F;
+    --light-gray: #f8f9fa;
+    --dark-gray: #6c757d;
+    --text-color: #212529;
+    --panel-bg: rgba(255, 255, 255, 0.95);
+    --shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body, html { height: 100%; width: 100%; font-family: 'Poppins', sans-serif; background-color: #ecf0f1; overflow: hidden; }
+#map { width: 100%; height: 100%; z-index: 1; }
+.ui-panel { position: absolute; top: 20px; left: 20px; width: 380px; max-height: calc(100vh - 40px); background: var(--panel-bg); backdrop-filter: blur(10px); border-radius: 12px; box-shadow: var(--shadow); z-index: 1000; display: flex; flex-direction: column; overflow-y: auto; }
+.panel-header { padding: 1rem 1.5rem; border-bottom: 1px solid #dee2e6; background-color: var(--primary-color); color: white; border-radius: 12px 12px 0 0; }
+.panel-header h3 { margin: 0; font-size: 1.2rem; }
+.panel-section { padding: 1rem 1.5rem; border-bottom: 1px solid #e9ecef; }
+.panel-section h4 { margin-bottom: 1rem; color: var(--text-color); font-size: 1rem; }
 
-.disaster-button {
-    width: 100%;
-    padding: 1rem;
-    font-size: 1.1rem;
-    font-weight: 700;
-    color: white;
-    background-color: #007bff; /* A different color to distinguish it */
+/* --- NEW: Search Container Styles --- */
+.search-container {
+    display: flex;
+    gap: 0.5rem;
+}
+#locationInput {
+    flex-grow: 1;
+    border: 1px solid #ccc;
+    padding: 0.75rem;
+    border-radius: 8px;
+    font-size: 1rem;
+}
+#searchBtn {
     border: none;
+    background-color: var(--primary-color);
+    color: white;
+    padding: 0 1rem;
     border-radius: 8px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    font-size: 1.1rem;
 }
 
-.disaster-button:hover {
-    background-color: #0056b3;
-}
+/* --- Weather Grid & Risk Styles (no change) --- */
+.weather-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.weather-item { background-color: var(--light-gray); padding: 0.75rem; border-radius: 8px; text-align: center; }
+.weather-item span { display: block; font-size: 0.8rem; color: var(--dark-gray); margin-bottom: 0.25rem; }
+.weather-item strong { font-size: 1.4rem; color: var(--text-color); }
+.risk-display { display: flex; align-items: center; gap: 1rem; }
+.risk-indicator { width: 20px; height: 20px; border-radius: 50%; background-color: var(--dark-gray); }
+#riskLevel { font-size: 1.2rem; font-weight: 700; }
+#riskDescription { margin-top: 0.5rem; font-size: 0.9rem; color: var(--dark-gray); }
 
-#safePlaceResult {
+/* --- Safer Area & SOS Button Styles --- */
+#saferAreaResult {
     font-size: 0.9rem;
     background-color: var(--light-gray);
     padding: 0.75rem;
     border-radius: 8px;
 }
+.sos-button { width: 100%; padding: 1rem; font-size: 1.2rem; font-weight: 700; color: white; background-color: var(--danger-color); border: none; border-radius: 8px; cursor: pointer; transition: background-color 0.3s ease; }
+.sos-button:hover { background-color: #b71c1c; }
 
-#safePlaceResult h5 {
-    margin-bottom: 0.25rem;
-    color: var(--text-color);
-}
-
-#safePlaceResult p {
-    margin-bottom: 0.75rem;
-    color: var(--dark-gray);
-}
-
-.directions-link {
-    display: inline-block;
-    padding: 0.5rem 1rem;
-    background-color: var(--primary-color);
-    color: white;
-    text-decoration: none;
-    border-radius: 6px;
-    font-weight: 600;
-    text-align: center;
-}
+/* --- Responsive (no change) --- */
+@media (max-width: 768px) { .ui-panel { width: calc(100% - 20px); left: 10px; top: 10px; max-height: 50vh; } }
