@@ -3,9 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Advanced Weather & Calamity Analysis</title>
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+    <title>Advanced Weather & Calamity Analysis with Google Maps</title>
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+    
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -15,17 +16,15 @@
         <div class="panel-header">
             <h3>Weather & Safety Dashboard</h3>
         </div>
-
+        
         <div class="panel-section">
-            <h4>Check a Location</h4>
-            <div class="search-container">
-                <input type="text" id="locationInput" placeholder="Enter a city name...">
-                <button id="searchBtn" aria-label="Search"><i class="fas fa-search"></i></button>
-            </div>
+            <button class="disaster-button" id="disasterBtn">
+                <i class="fas fa-shield-alt"></i> Find Nearest Safe Place
+            </button>
         </div>
 
         <div class="panel-section">
-            <h4>Current Conditions at Center</h4>
+            <h4>Current Conditions</h4>
             <div class="weather-grid">
                 <div class="weather-item"><span><i class="fas fa-thermometer-half"></i> Temp</span><strong id="temperature">--</strong></div>
                 <div class="weather-item"><span><i class="fas fa-tint"></i> Humidity</span><strong id="humidity">--</strong></div>
@@ -36,29 +35,19 @@
 
         <div class="panel-section risk-section">
             <h4>Risk Analysis</h4>
-            <div class="risk-display">
-                <div class="risk-indicator"></div>
-                <strong id="riskLevel">--</strong>
+            <p id="riskDescription">Click the button above to start.</p>
+        </div>
+
+        <div class="panel-section">
+            <h4>Recommended Safe Place</h4>
+            <div id="safePlaceResult">
+                Click the "Find Nearest Safe Place" button to get a recommendation.
             </div>
-            <p id="riskDescription">Enter a location to begin.</p>
-        </div>
-
-        <div class="panel-section">
-            <h4>Nearby Safer Area</h4>
-            <p id="saferAreaResult">No analysis yet.</p>
-        </div>
-
-        <div class="panel-section">
-            <button class="sos-button" onclick="triggerSOS()"><i class="fas fa-exclamation-triangle"></i> TRIGGER SOS</button>
-        </div>
-        
-        <div class="panel-section">
-            <h4>Nearby Emergency Services</h4>
-            <div id="emergencyServices">Unavailable</div>
         </div>
     </div>
 
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBGoiCTYEubnIQgi38BkfibqxkEv5-R-3E&libraries=places,geometry&callback=initMap" async defer></script>
+    
     <script src="script.js"></script>
 </body>
 </html>
