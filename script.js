@@ -1,5 +1,5 @@
 // --- CONFIG ---
-const OPENWEATHER_API_KEY = "17d0cf1057d1b4b9d23beca65ab31658";
+const OPENWEATHER_API_KEY = "bc21aa87c8a025c92dbdede118df6b6e";
 
 // --- Globals ---
 let map, userMarker, clickedMarker, safePlaceMarker;
