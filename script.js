@@ -172,7 +172,7 @@ function updateWeatherDisplay(data) {
   const rainfall = data.rain?.["1h"] || 0;
   document.getElementById("temperature").textContent = `${data.main.temp.toFixed(1)}°C`;
   document.getElementById("humidity").textContent = `${data.main.humidity}%`;
-  document.getElementById("wind").textContent = `${data.main.speed.toFixed(1)} m/s`;
+  document.getElementById("wind").textContent = `${data.wind.speed.toFixed(1)} m/s`;
   document.getElementById("rainfall").textContent = `${rainfall} mm`;
 }
 
