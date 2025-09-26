@@ -3,26 +3,29 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Disaster Watch Dashboard</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <title>Weather & Safety Dashboard</title>
+
+  <!-- FontAwesome Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
+  <!-- Google Map -->
   <div id="map"></div>
 
+  <!-- Control Panel -->
   <div class="ui-panel">
     <div class="panel-header">
-      <h3>Disaster Watch Dashboard</h3>
+      <h3>Weather & Safety Dashboard</h3>
     </div>
     
     <div class="panel-section button-group">
-      <button class="action-button" id="useMyLocationBtn" title="Use your current location">
+      <button class="action-button" id="useMyLocationBtn">
         <i class="fas fa-location-arrow"></i> Use My Location
       </button>
-      <button class="disaster-button" id="disasterBtn" title="Find the safest nearby shelter">
+      <button class="disaster-button" id="disasterBtn">
         <i class="fas fa-shield-alt"></i> Find Safe Place
       </button>
     </div>
@@ -32,25 +35,28 @@
       <div class="weather-grid">
         <div class="weather-item"><span><i class="fas fa-thermometer-half"></i> Temp</span><strong id="temperature">--</strong></div>
         <div class="weather-item"><span><i class="fas fa-tint"></i> Humidity</span><strong id="humidity">--</strong></div>
-        <div class="weather-item"><span><i class="fas fa-wind"></i> Wind</span><strong id="wind">--</strong></div>
+        <div class="weather-item"><span><i class="fas fa-compress-arrows-alt"></i> Pressure</span><strong id="pressure">--</strong></div>
         <div class="weather-item"><span><i class="fas fa-cloud-showers-heavy"></i> Rain (1h)</span><strong id="rainfall">--</strong></div>
       </div>
     </div>
 
     <div class="panel-section risk-section">
       <h4>Risk Analysis</h4>
-      <p id="riskDescription">Use your location or click on the map to begin.</p>
+      <p id="riskDescription">Select a location to begin.</p>
     </div>
 
     <div class="panel-section">
       <h4>Recommended Safe Place</h4>
       <div id="safePlaceResult">
-        Click "Find Safe Place" for a recommendation.
+        Click "Find Safe Place" for a recommendation based on your location.
       </div>
     </div>
   </div>
 
+  <!-- Google Maps API -->
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBGoiCTYEubnIQgi38BkfibqxkEv5-R-3E&libraries=places,geometry&callback=initMap" async defer></script>
+  
+  <!-- Custom JS -->
   <script src="script.js"></script>
 </body>
 </html>
