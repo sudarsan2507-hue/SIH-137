@@ -1,45 +1,52 @@
+/* Google Font Import */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
 
 :root {
-  --primary-color: #3742fa;
-  --secondary-color: #007bff;
-  --action-color: #6c757d;
-  --light-gray: #f8f9fa;
-  --dark-gray: #6c757d;
-  --text-color: #212529;
-  --panel-bg: rgba(255, 255, 255, 0.95);
-  --shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  --primary-color: #3B82F6; /* Blue 500 */
+  --secondary-color: #10B981; /* Emerald 500 */
+  --action-color: #6B7280; /* Gray 500 */
+  --light-gray: #F3F4F6; /* Gray 100 */
+  --medium-gray: #E5E7EB; /* Gray 200 */
+  --dark-gray: #4B5563; /* Gray 600 */
+  --text-color: #1F2937; /* Gray 800 */
+  --panel-bg: rgba(255, 255, 255, 0.9);
+  --shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+  --border-radius: 12px;
 }
 
 * {
-  margin: 0; padding: 0;
+  margin: 0;
+  padding: 0;
   box-sizing: border-box;
 }
 
 body, html {
-  height: 100%; width: 100%;
+  height: 100%;
+  width: 100%;
   font-family: 'Poppins', sans-serif;
   background-color: #ecf0f1;
   overflow: hidden;
 }
 
-/* Map */
+/* Map Styling */
 #map {
   width: 100%;
   height: 100%;
   z-index: 1;
 }
 
-/* Side Panel */
+/* Main UI Panel */
 .ui-panel {
   position: absolute;
-  top: 20px; left: 20px;
+  top: 20px;
+  left: 20px;
   width: 380px;
   max-height: calc(100vh - 40px);
   background: var(--panel-bg);
   backdrop-filter: blur(10px);
-  border-radius: 12px;
+  border-radius: var(--border-radius);
   box-shadow: var(--shadow);
+  border: 1px solid var(--medium-gray);
   z-index: 1000;
   display: flex;
   flex-direction: column;
@@ -50,46 +57,63 @@ body, html {
   padding: 1rem 1.5rem;
   background-color: var(--primary-color);
   color: white;
-  border-radius: 12px 12px 0 0;
+  border-radius: var(--border-radius) var(--border-radius) 0 0;
+  text-align: center;
+}
+
+.panel-header h3 {
+  font-weight: 600;
 }
 
 .panel-section {
-  padding: 1rem 1.5rem;
-  border-bottom: 1px solid #e9ecef;
+  padding: 1.25rem 1.5rem;
+  border-bottom: 1px solid var(--medium-gray);
+}
+
+.panel-section:last-child {
+  border-bottom: none;
 }
 
 .panel-section h4 {
   margin-bottom: 1rem;
   font-size: 1rem;
+  font-weight: 600;
   color: var(--text-color);
 }
 
-/* Buttons */
+/* Button Group */
 .button-group {
   display: flex;
-  gap: 0.5rem;
+  gap: 0.75rem;
 }
 
 .action-button, .disaster-button {
   flex: 1;
   padding: 0.8rem;
   font-size: 0.9rem;
-  font-weight: 700;
+  font-weight: 600;
   border: none;
   border-radius: 8px;
   color: white;
   cursor: pointer;
-  display: flex; align-items: center; justify-content: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   gap: 0.5rem;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.action-button:hover, .disaster-button:hover {
+  transform: translateY(-2px);
 }
 
 .action-button { background: var(--action-color); }
 .action-button:hover { background: #5a6268; }
 
 .disaster-button { background: var(--secondary-color); }
-.disaster-button:hover { background: #0056b3; }
+.disaster-button:hover { background: #059669; }
 
-/* Weather Grid */
+/* Weather Info Grid */
 .weather-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -101,6 +125,7 @@ body, html {
   padding: 0.75rem;
   border-radius: 8px;
   text-align: center;
+  border: 1px solid var(--medium-gray);
 }
 
 .weather-item span {
@@ -113,36 +138,57 @@ body, html {
 .weather-item strong {
   font-size: 1.4rem;
   color: var(--text-color);
+  font-weight: 700;
 }
 
-/* Safe Place */
-#safePlaceResult {
+/* Risk & Safe Place Sections */
+#riskDescription, #safePlaceResult {
   font-size: 0.9rem;
+  color: var(--dark-gray);
   background: var(--light-gray);
-  padding: 0.75rem;
+  padding: 1rem;
   border-radius: 8px;
+}
+
+#safePlaceResult h5 {
+  font-size: 1.1rem;
+  color: var(--text-color);
+  margin-bottom: 0.25rem;
+}
+
+#safePlaceResult p {
+  margin-bottom: 1rem;
 }
 
 .directions-link {
   display: inline-block;
-  padding: 0.5rem 1rem;
+  padding: 0.6rem 1.2rem;
   background: var(--primary-color);
   color: white;
   text-decoration: none;
   border-radius: 6px;
   font-weight: 600;
+  transition: background-color 0.2s ease;
 }
 
 .directions-link:hover {
-  background: #2732c4;
+  background: #2563EB; /* Blue 600 */
 }
 
-/* Responsive */
+/* Responsive Design */
 @media (max-width: 768px) {
   .ui-panel {
     width: calc(100% - 20px);
     left: 10px;
     top: 10px;
-    max-height: 50vh;
+    max-height: 55vh; /* Allow slightly more height on mobile */
+  }
+
+  .panel-header h3, .panel-section h4 {
+    font-size: 0.95rem;
+  }
+
+  .weather-item strong {
+    font-size: 1.2rem;
   }
 }
