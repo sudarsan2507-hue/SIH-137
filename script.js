@@ -202,10 +202,7 @@ function displaySafePlaceAndRoute(origin, place) {
     position: placeLoc,
     map,
     title: place.name,
-    icon: {
-        url: "http://maps.google.com/mapfiles/ms/icons/green-dot.png"
-    }
-  });
+});
 
   directionsService.route(
     { origin, destination: placeLoc, travelMode: google.maps.TravelMode.DRIVING },
@@ -223,7 +220,7 @@ function displaySafePlaceAndRoute(origin, place) {
   const resultPanel = document.getElementById("safePlaceResult");
   const destination = `${placeLoc.lat()},${placeLoc.lng()}`;
   // Corrected Google Maps URL
-  const url = `https://www.google.com/maps/dir/?api=1&destination=${destination}`;
+ const url = `https://www.google.com/maps/dir/?api=1&origin=${origin.lat},${origin.lng}&destination=${destination}`;
 
   resultPanel.innerHTML = `
     <h5>${place.name}</h5>
