@@ -5,22 +5,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Disaster Watch Dashboard</title>
 
-  <!-- Google Fonts: Poppins -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 
-  <!-- FontAwesome Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
 
-  <!-- Custom CSS -->
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <!-- Google Map Container -->
+
   <div id="map"></div>
 
-  <!-- Main Control Panel -->
   <div class="ui-panel">
     <div class="panel-header">
       <h3>Disaster Watch Dashboard</h3>
@@ -58,14 +54,8 @@
     </div>
   </div>
 
-  <!-- 
-    IMPORTANT: Replace "YOUR_GOOGLE_MAPS_API_KEY" with your actual API key.
-    For security, it is highly recommended to restrict this key to your website's domain 
-    in the Google Cloud Console.
-  -->
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBGoiCTYEubnIQgi38BkfibqxkEv5-R-3E&libraries=places,geometry&callback=initMap" async defer></script>
-  
-  <!-- Custom JS -->
+
   <script src="script.js"></script>
 </body>
 </html>
