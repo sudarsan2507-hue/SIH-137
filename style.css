@@ -5,6 +5,7 @@
 :root {
     --primary-color: #3742fa;
     --secondary-color: #007bff;
+    --action-color: #6c757d;
     --danger-color: #D32F2F;
     --light-gray: #f8f9fa;
     --dark-gray: #6c757d;
@@ -74,18 +75,38 @@ html {
     font-size: 1rem;
 }
 
-/* --- Disaster & Search Button Styles --- */
-.disaster-button {
+/* --- Button Styles --- */
+.button-group {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.action-button, .disaster-button {
     width: 100%;
-    padding: 1rem;
-    font-size: 1.1rem;
+    padding: 0.8rem;
+    font-size: 0.9rem;
     font-weight: 700;
     color: white;
-    background-color: var(--secondary-color);
     border: none;
     border-radius: 8px;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.action-button {
+    background-color: var(--action-color);
+}
+
+.action-button:hover {
+    background-color: #5a6268;
+}
+
+.disaster-button {
+    background-color: var(--secondary-color);
 }
 
 .disaster-button:hover {
@@ -116,12 +137,6 @@ html {
 .weather-item strong {
     font-size: 1.4rem;
     color: var(--text-color);
-}
-
-.risk-display {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
 }
 
 #riskDescription {
