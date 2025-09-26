@@ -1,49 +1,45 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
 
 :root {
-  --primary-color: #3B82F6;
-  --secondary-color: #10B981;
-  --action-color: #6B7280;
-  --light-gray: #F3F4F6;
-  --medium-gray: #E5E7EB;
-  --dark-gray: #4B5563;
-  --text-color: #1F2937;
-  --panel-bg: rgba(255, 255, 255, 0.9);
-  --shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
-  --border-radius: 12px;
+  --primary-color: #3742fa;
+  --secondary-color: #007bff;
+  --action-color: #6c757d;
+  --light-gray: #f8f9fa;
+  --dark-gray: #6c757d;
+  --text-color: #212529;
+  --panel-bg: rgba(255, 255, 255, 0.95);
+  --shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
 * {
-  margin: 0;
-  padding: 0;
+  margin: 0; padding: 0;
   box-sizing: border-box;
 }
 
 body, html {
-  height: 100%;
-  width: 100%;
+  height: 100%; width: 100%;
   font-family: 'Poppins', sans-serif;
   background-color: #ecf0f1;
   overflow: hidden;
 }
 
+/* Map */
 #map {
   width: 100%;
   height: 100%;
   z-index: 1;
 }
 
+/* Side Panel */
 .ui-panel {
   position: absolute;
-  top: 20px;
-  left: 20px;
+  top: 20px; left: 20px;
   width: 380px;
   max-height: calc(100vh - 40px);
   background: var(--panel-bg);
   backdrop-filter: blur(10px);
-  border-radius: var(--border-radius);
+  border-radius: 12px;
   box-shadow: var(--shadow);
-  border: 1px solid var(--medium-gray);
   z-index: 1000;
   display: flex;
   flex-direction: column;
@@ -54,61 +50,46 @@ body, html {
   padding: 1rem 1.5rem;
   background-color: var(--primary-color);
   color: white;
-  border-radius: var(--border-radius) var(--border-radius) 0 0;
-  text-align: center;
-}
-
-.panel-header h3 {
-  font-weight: 600;
+  border-radius: 12px 12px 0 0;
 }
 
 .panel-section {
-  padding: 1.25rem 1.5rem;
-  border-bottom: 1px solid var(--medium-gray);
-}
-
-.panel-section:last-child {
-  border-bottom: none;
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid #e9ecef;
 }
 
 .panel-section h4 {
   margin-bottom: 1rem;
   font-size: 1rem;
-  font-weight: 600;
   color: var(--text-color);
 }
 
+/* Buttons */
 .button-group {
   display: flex;
-  gap: 0.75rem;
+  gap: 0.5rem;
 }
 
 .action-button, .disaster-button {
   flex: 1;
   padding: 0.8rem;
   font-size: 0.9rem;
-  font-weight: 600;
+  font-weight: 700;
   border: none;
   border-radius: 8px;
   color: white;
   cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  display: flex; align-items: center; justify-content: center;
   gap: 0.5rem;
-  transition: background-color 0.2s ease, transform 0.1s ease;
-}
-
-.action-button:hover, .disaster-button:hover {
-  transform: translateY(-2px);
 }
 
 .action-button { background: var(--action-color); }
 .action-button:hover { background: #5a6268; }
 
 .disaster-button { background: var(--secondary-color); }
-.disaster-button:hover { background: #059669; }
+.disaster-button:hover { background: #0056b3; }
 
+/* Weather Grid */
 .weather-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -120,7 +101,6 @@ body, html {
   padding: 0.75rem;
   border-radius: 8px;
   text-align: center;
-  border: 1px solid var(--medium-gray);
 }
 
 .weather-item span {
@@ -133,55 +113,36 @@ body, html {
 .weather-item strong {
   font-size: 1.4rem;
   color: var(--text-color);
-  font-weight: 700;
 }
 
-#riskDescription, #safePlaceResult {
+/* Safe Place */
+#safePlaceResult {
   font-size: 0.9rem;
-  color: var(--dark-gray);
   background: var(--light-gray);
-  padding: 1rem;
+  padding: 0.75rem;
   border-radius: 8px;
-}
-
-#safePlaceResult h5 {
-  font-size: 1.1rem;
-  color: var(--text-color);
-  margin-bottom: 0.25rem;
-}
-
-#safePlaceResult p {
-  margin-bottom: 1rem;
 }
 
 .directions-link {
   display: inline-block;
-  padding: 0.6rem 1.2rem;
+  padding: 0.5rem 1rem;
   background: var(--primary-color);
   color: white;
   text-decoration: none;
   border-radius: 6px;
   font-weight: 600;
-  transition: background-color 0.2s ease;
 }
 
 .directions-link:hover {
-  background: #2563EB;
+  background: #2732c4;
 }
 
+/* Responsive */
 @media (max-width: 768px) {
   .ui-panel {
     width: calc(100% - 20px);
     left: 10px;
     top: 10px;
-    max-height: 55vh;
-  }
-
-  .panel-header h3, .panel-section h4 {
-    font-size: 0.95rem;
-  }
-
-  .weather-item strong {
-    font-size: 1.2rem;
+    max-height: 50vh;
   }
 }
