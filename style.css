@@ -1,14 +1,13 @@
-/* Google Font Import */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
 
 :root {
-  --primary-color: #3B82F6; /* Blue 500 */
-  --secondary-color: #10B981; /* Emerald 500 */
-  --action-color: #6B7280; /* Gray 500 */
-  --light-gray: #F3F4F6; /* Gray 100 */
-  --medium-gray: #E5E7EB; /* Gray 200 */
-  --dark-gray: #4B5563; /* Gray 600 */
-  --text-color: #1F2937; /* Gray 800 */
+  --primary-color: #3B82F6;
+  --secondary-color: #10B981;
+  --action-color: #6B7280;
+  --light-gray: #F3F4F6;
+  --medium-gray: #E5E7EB;
+  --dark-gray: #4B5563;
+  --text-color: #1F2937;
   --panel-bg: rgba(255, 255, 255, 0.9);
   --shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
   --border-radius: 12px;
@@ -28,14 +27,12 @@ body, html {
   overflow: hidden;
 }
 
-/* Map Styling */
 #map {
   width: 100%;
   height: 100%;
   z-index: 1;
 }
 
-/* Main UI Panel */
 .ui-panel {
   position: absolute;
   top: 20px;
@@ -81,7 +78,6 @@ body, html {
   color: var(--text-color);
 }
 
-/* Button Group */
 .button-group {
   display: flex;
   gap: 0.75rem;
@@ -113,7 +109,6 @@ body, html {
 .disaster-button { background: var(--secondary-color); }
 .disaster-button:hover { background: #059669; }
 
-/* Weather Info Grid */
 .weather-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -141,7 +136,6 @@ body, html {
   font-weight: 700;
 }
 
-/* Risk & Safe Place Sections */
 #riskDescription, #safePlaceResult {
   font-size: 0.9rem;
   color: var(--dark-gray);
@@ -172,16 +166,15 @@ body, html {
 }
 
 .directions-link:hover {
-  background: #2563EB; /* Blue 600 */
+  background: #2563EB;
 }
 
-/* Responsive Design */
 @media (max-width: 768px) {
   .ui-panel {
     width: calc(100% - 20px);
     left: 10px;
     top: 10px;
-    max-height: 55vh; /* Allow slightly more height on mobile */
+    max-height: 55vh;
   }
 
   .panel-header h3, .panel-section h4 {
