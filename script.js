@@ -1,5 +1,5 @@
 // --- CONFIGURATION ---
-const OPENWEATHER_API_KEY = "YOUR_OPENWEATHER_API_KEY_HERE";
+const OPENWEATHER_API_KEY = "17d0cf1057d1b4b9d23beca65ab31658";
 
 // --- Global variables ---
 let map;
