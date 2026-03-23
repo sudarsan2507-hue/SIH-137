@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Weather & Safety Dashboard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>WeatherGuard | Safety Dashboard</title>
 
   <!-- FontAwesome Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
 
-  <!-- Custom CSS -->
-  <link rel="stylesheet" href="style.css">
-</head>
+  <!-- No direct CSS link needed, Vite will inject it via main.js -->
+
 <body>
   <!-- Google Map -->
   <div id="map"></div>
@@ -18,12 +18,12 @@
   <!-- Control Panel -->
   <div class="ui-panel">
     <div class="panel-header">
-      <h3>Weather & Safety Dashboard</h3>
+      <h3>WeatherGuard</h3>
     </div>
-    
+
     <div class="panel-section button-group">
       <button class="action-button" id="useMyLocationBtn">
-        <i class="fas fa-location-arrow"></i> Use My Location
+        <i class="fas fa-location-arrow"></i> My Location
       </button>
       <button class="disaster-button" id="disasterBtn">
         <i class="fas fa-shield-alt"></i> Find Safe Place
@@ -31,32 +31,41 @@
     </div>
 
     <div class="panel-section">
+      <div style="display: flex; gap: 0.5rem; margin-bottom: 0px;">
+        <input type="text" id="searchInput" placeholder="Search a location..." style="flex: 1; padding: 0.5rem; border-radius: var(--radius-sm); border: 1px solid rgba(0,0,0,0.1); font-family: inherit;">
+        <button id="searchBtn" style="padding: 0.5rem 1rem; border: none; border-radius: var(--radius-sm); background: var(--primary-color); color: white; cursor: pointer;"><i class="fas fa-search"></i></button>
+      </div>
+    </div>
+
+    <div class="panel-section">
       <h4>Current Conditions</h4>
       <div class="weather-grid">
-        <div class="weather-item"><span><i class="fas fa-thermometer-half"></i> Temp</span><strong id="temperature">--</strong></div>
-        <div class="weather-item"><span><i class="fas fa-tint"></i> Humidity</span><strong id="humidity">--</strong></div>
-        <div class="weather-item"><span><i class="fas fa-compress-arrows-alt"></i> Pressure</span><strong id="pressure">--</strong></div>
-        <div class="weather-item"><span><i class="fas fa-cloud-showers-heavy"></i> Rain (1h)</span><strong id="rainfall">--</strong></div>
+        <div class="weather-item"><span><i class="fas fa-thermometer-half"></i> Temp</span><strong
+            id="temperature">--</strong></div>
+        <div class="weather-item"><span><i class="fas fa-tint"></i> Humidity</span><strong id="humidity">--</strong>
+        </div>
+        <div class="weather-item"><span><i class="fas fa-compress-arrows-alt"></i> Pressure</span><strong
+            id="pressure">--</strong></div>
+        <div class="weather-item"><span><i class="fas fa-cloud-showers-heavy"></i> Rain (1h)</span><strong
+            id="rainfall">--</strong></div>
       </div>
     </div>
 
     <div class="panel-section risk-section">
       <h4>Risk Analysis</h4>
-      <p id="riskDescription">Select a location to begin.</p>
+      <p id="riskDescription">Select a location to begin analysis.</p>
     </div>
 
     <div class="panel-section">
       <h4>Recommended Safe Place</h4>
       <div id="safePlaceResult">
-        Click "Find Safe Place" for a recommendation based on your location.
+        <p>Click "Find Safe Place" for a recommendation based on your location.</p>
       </div>
     </div>
   </div>
 
-  <!-- Google Maps API -->
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBGoiCTYEubnIQgi38BkfibqxkEv5-R-3E&libraries=places,geometry&callback=initMap" async defer></script>
-  
-  <!-- Custom JS -->
-  <script src="script.js"></script>
+  <!-- Vite entrypoint -->
+  <script type="module" src="/src/main.js"></script>
 </body>
+
 </html>

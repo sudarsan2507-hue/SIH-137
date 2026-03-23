@@ -1,0 +1,30 @@
+{
+  "name": "sih-137",
+  "version": "1.0.0",
+  "description": "A modern, responsive weather and safety dashboard that helps users navigate to safer locations during extreme weather conditions.",
+  "main": "index.html",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sudarsan2507-hue/SIH-137.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/sudarsan2507-hue/SIH-137/issues"
+  },
+  "homepage": "https://github.com/sudarsan2507-hue/SIH-137#readme",
+  "devDependencies": {
+    "dotenv": "^17.3.1",
+    "vite": "^8.0.1"
+  },
+  "dependencies": {
+    "leaflet": "^1.9.4"
+  }
+}
