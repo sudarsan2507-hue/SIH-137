@@ -1,11 +1,31 @@
 export async function fetchWeather(lat, lon) {
-    const apiKey = import.meta.env.VITE_OPENWEATHER_API_KEY;
-    if (!apiKey || apiKey === 'your_openweather_api_key_here') {
-        throw new Error("Missing OpenWeatherMap API Key in .env. Please check the Setup Instructions.");
+    // Open-Meteo is completely free and requires NO API KEY! Perfect for zero-configuration setups.
+    const url = `https://api.open-meteo.com/v1/forecast?latitude=${Math.round(lat * 1000) / 1000}&longitude=${Math.round(lon * 1000) / 1000}&current=temperature_2m,relative_humidity_2m,surface_pressure,precipitation,wind_speed_10m,wind_direction_10m`;
+
+    try {
+        const response = await fetch(url);
+        if (!response.ok) {
+            throw new Error(`Open-Meteo returned HTTP ${response.status}`);
+        }
+        
+        const data = await response.json();
+        
+        // Map Open-Meteo schema to the existing structure expected by main.js
+        return {
+            main: {
+                temp: data.current.temperature_2m,
+                humidity: data.current.relative_humidity_2m,
+                pressure: data.current.surface_pressure
+            },
+            rain: {
+                '1h': data.current.precipitation
+            },
+            wind: {
+                speed: data.current.wind_speed_10m,
+                deg: data.current.wind_direction_10m
+            }
+        };
+    } catch (e) {
+        throw new Error("Failed to fetch from keyless weather API: " + e.message);
     }
-    const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`;
-    return fetch(url).then(res => {
-        if (!res.ok) throw new Error(`Weather fetch failed: ${res.status}`);
-        return res.json();
-    });
 }
