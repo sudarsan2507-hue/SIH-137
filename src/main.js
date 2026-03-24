@@ -1,4 +1,4 @@
-import './styles/style.css';  
+// CSS is now loaded natively in index.html
 import { fetchWeather } from './services/weatherService.js';
 import { initMapAPI, initializeMap, updateMarkers, getCurrentLocation, searchForPlaces, findBestPlace, displaySafePlaceAndRoute, onMapClick, drawStormTrajectory } from './services/mapService.js';
 import { analyzeRiskWithML } from './core/RiskAnalyzer.js';
