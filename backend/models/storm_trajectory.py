@@ -1,4 +1,4 @@
-import numpy as np
+import math
 
 class StormTrajectoryPredictor:
     def __init__(self):
@@ -6,7 +6,7 @@ class StormTrajectoryPredictor:
 
     def predict_next_vectors(self, current_lat, current_lon, wind_speed, wind_deg, hours=3):
         predictions = []
-        rad = np.radians(270 - wind_deg)
+        rad = math.radians(270 - wind_deg)
         speed_deg_per_hour = (wind_speed * 3.6) / 111.0 
         
         lat = current_lat
@@ -14,8 +14,8 @@ class StormTrajectoryPredictor:
         
         for h in range(1, hours + 1):
             curve_factor = h * 0.05
-            lat += np.sin(rad + curve_factor) * speed_deg_per_hour
-            lon += np.cos(rad + curve_factor) * speed_deg_per_hour
+            lat += math.sin(rad + curve_factor) * speed_deg_per_hour
+            lon += math.cos(rad + curve_factor) * speed_deg_per_hour
             
             predictions.append({
                 "hour": h,
