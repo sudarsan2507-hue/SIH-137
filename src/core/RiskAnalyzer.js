@@ -8,6 +8,7 @@ export async function analyzeRiskWithML(lat, lng, weather) {
     };
 
     const backendUrl = import.meta.env.VITE_BACKEND_URL;
+    console.log(import.meta.env.VITE_BACKEND_URL);
     try {
         const res = await fetch(`${backendUrl}/api/analyze-risk`, {
             method: 'POST',
