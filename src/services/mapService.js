@@ -1,7 +1,6 @@
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 
-// Fix typical Leaflet missing marker icons issue internally
 delete L.Icon.Default.prototype._getIconUrl;
 L.Icon.Default.mergeOptions({
   iconRetinaUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon-2x.png',
@@ -17,15 +16,12 @@ let routeLine;
 let stormLine;
 
 export async function initMapAPI() {
-    // Leaflet and OSM require no API keys or async loaders!
     return true;
 }
 
 export function initializeMap(mapElement) {
-    // Initialize Leaflet Map
     map = L.map(mapElement, { zoomControl: false }).setView([20.5937, 78.9629], 5);
     
-    // Use OpenStreetMap Tiles completely FREE
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
         maxZoom: 19
@@ -37,12 +33,11 @@ export function initializeMap(mapElement) {
 
 export function updateMarkers(lat, lng, isClick) {
     const location = { lat, lng };
-    map.setView([lat, lng], 13, { animate: true }); // Smooth zoom
+    map.setView([lat, lng], 13, { animate: true });
 
     if (isClick) {
         if (clickedMarker) map.removeLayer(clickedMarker);
         clickedMarker = L.marker([lat, lng], { title: "Selected Location" }).addTo(map);
-        // Add a popup to show the searched/clicked location prominently
         clickedMarker.bindPopup("Target Location").openPopup();
     } else {
         if (userMarker) map.removeLayer(userMarker);
@@ -66,7 +61,6 @@ export function getCurrentLocation() {
 }
 
 export async function searchForPlaces(location, radius) {
-    // Overpass API for FREE nearby places (hospitals, police)
     const overpassUrl = 'https://overpass-api.de/api/interpreter';
     const query = `
         [out:json][timeout:25];
@@ -82,10 +76,9 @@ export async function searchForPlaces(location, radius) {
         const data = await response.json();
         
         if (!data.elements || data.elements.length === 0) {
-            return []; // No places found
+            return [];
         }
         
-        // Map Overpass syntax to match our internal expectation
         return data.elements.map(el => ({
             name: el.tags.name || el.tags.amenity || 'Safe Place',
             vicinity: el.tags['addr:street'] || 'Nearby',
@@ -131,8 +124,6 @@ export async function displaySafePlaceAndRoute(origin, place, updateUiCallback) 
     if (routeLine) map.removeLayer(routeLine);
 
     const placeLoc = place.geometry.location;
-    
-    // Leaflet marker for the safe location
     const greenIcon = new L.Icon({
         iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-green.png',
         shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
@@ -144,7 +135,6 @@ export async function displaySafePlaceAndRoute(origin, place, updateUiCallback) 
         .bindPopup(`<b>${place.name}</b>`)
         .openPopup();
 
-    // Use OSRM for FREE Routing API
     try {
         const routeUrl = `https://router.project-osrm.org/route/v1/driving/${origin.lng},${origin.lat};${placeLoc.lng},${placeLoc.lat}?overview=full&geometries=geojson`;
         const res = await fetch(routeUrl);
@@ -155,13 +145,10 @@ export async function displaySafePlaceAndRoute(origin, place, updateUiCallback) 
             routeLine = L.geoJSON(geojsonRoute, {
                 style: { color: '#4361ee', weight: 5, opacity: 0.8 }
             }).addTo(map);
-            
-            // Adjust bounds to fit route
             map.fitBounds(routeLine.getBounds());
         }
     } catch(e) {
         console.warn("Could not fetch route from OSRM, drawing direct line instead", e);
-        // Fallback boundary fitting covering origin to destination
         map.fitBounds([
              [origin.lat, origin.lng],
              [placeLoc.lat, placeLoc.lng]
@@ -169,7 +156,6 @@ export async function displaySafePlaceAndRoute(origin, place, updateUiCallback) 
         routeLine = L.polyline([[origin.lat, origin.lng], [placeLoc.lat, placeLoc.lng]], {color: 'red'}).addTo(map);
     }
 
-    // Link to OpenStreetMap directions
     const directionsUrl = `https://www.openstreetmap.org/directions?engine=osrm_car&route=${origin.lat}%2C${origin.lng}%3B${placeLoc.lat}%2C${placeLoc.lng}`;
     updateUiCallback(place, directionsUrl);
 }
@@ -186,18 +172,14 @@ export function drawStormTrajectory(trajectoryPoints) {
         weight: 3, 
         opacity: 0.8
     }).addTo(map);
-    
-    // Add warning popup to the final predicted point
     const endpoint = trajectoryPoints[trajectoryPoints.length - 1];
     L.circleMarker([endpoint.predicted_lat, endpoint.predicted_lon], {color: 'red', radius: 6})
      .addTo(map)
      .bindPopup("Predicted Storm Center in 3 Hours");
 }
 
-// Emulate Google Maps callback for main.js by passing an object with lat/lng
 export function onMapClick(callback) {
     map.on('click', (e) => {
-        // e.latlng contains .lat and .lng
         callback(e.latlng.lat, e.latlng.lng);
     });
 }

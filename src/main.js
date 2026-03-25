@@ -1,9 +1,8 @@
-// CSS is now loaded natively in index.html
+
 import { fetchWeather } from './services/weatherService.js';
 import { initMapAPI, initializeMap, updateMarkers, getCurrentLocation, searchForPlaces, findBestPlace, displaySafePlaceAndRoute, onMapClick, drawStormTrajectory } from './services/mapService.js';
 import { analyzeRiskWithML } from './core/RiskAnalyzer.js';
 
-// Elements
 const disasterBtn = document.getElementById('disasterBtn');
 const useMyLocationBtn = document.getElementById('useMyLocationBtn');
 const riskDescription = document.getElementById('riskDescription');
@@ -12,7 +11,6 @@ const mapElement = document.getElementById('map');
 const searchInput = document.getElementById('searchInput');
 const searchBtn = document.getElementById('searchBtn');
 
-// Display 
 function updateWeatherDisplay(data) {
     if (!data.main) return;
     const rainfall = data.rain && data.rain['1h'] ? data.rain['1h'] : 0;
@@ -31,7 +29,6 @@ function updateUiWithSafePlace(place, directionsUrl) {
     riskDescription.textContent = "Route to recommended safe place is now drawn on the map.";
 }
 
-// Logic
 let currentWeather = null;
 
 async function handleLocationUpdate(lat, lng, isClick) {
@@ -86,7 +83,6 @@ async function findSafePlace() {
     try {
         const riskData = await analyzeRiskWithML(currentLocation.lat, currentLocation.lng, currentWeather);
         
-        // Render Trajectory
         drawStormTrajectory(riskData.storm_trajectory);
         
         riskDescription.innerHTML = `
@@ -132,7 +128,6 @@ function getUserLocation() {
     }
 }
 
-// Init
 async function bootstrap() {
     try {
         await initMapAPI();
@@ -145,12 +140,10 @@ async function bootstrap() {
             if (e.key === 'Enter') searchLocationByNominatim();
         });
 
-        // The Leaflet mapService now passes (lat, lng) directly
         onMapClick((lat, lng) => {
             handleLocationUpdate(lat, lng, true);
         });
 
-        // Initialize user location on load
         getUserLocation();
     } catch (e) {
         riskDescription.textContent = "Application Error: " + e.message;
@@ -158,5 +151,4 @@ async function bootstrap() {
     }
 }
 
-// Start app
 bootstrap();

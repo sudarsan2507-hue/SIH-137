@@ -28,14 +28,12 @@ body, html {
   overflow: hidden;
 }
 
-/* Map specific override */
 #map {
   width: 100%;
   height: 100%;
   z-index: 1;
 }
 
-/* Side Panel Container */
 .ui-panel {
   position: absolute;
   top: 24px; left: 24px;
@@ -61,7 +59,6 @@ body, html {
   to { opacity: 1; transform: translateY(0) scale(1); }
 }
 
-/* Header */
 .panel-header {
   padding: 1.5rem 1.75rem;
   background: transparent;
@@ -74,11 +71,11 @@ body, html {
   letter-spacing: -0.025em;
   background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
   margin: 0;
 }
 
-/* Sections */
 .panel-section {
   padding: 1.5rem 1.75rem;
   border-bottom: 1px solid rgba(0,0,0,0.05);
@@ -100,7 +97,6 @@ body, html {
   gap: 0.5rem;
 }
 
-/* Buttons */
 .button-group {
   display: flex;
   gap: 0.75rem;
@@ -144,7 +140,6 @@ body, html {
   box-shadow: 0 4px 12px rgba(67, 97, 238, 0.3);
 }
 
-/* Weather Grid */
 .weather-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -183,7 +178,6 @@ body, html {
   letter-spacing: -0.02em;
 }
 
-/* Risk Analysis & Safe Place Text */
 #riskDescription {
   font-size: 0.95rem;
   line-height: 1.5;
@@ -194,7 +188,6 @@ body, html {
   border-left: 3px solid var(--primary-color);
 }
 
-/* Safe Place Result */
 #safePlaceResult {
   background: transparent;
   padding: 0;
@@ -230,7 +223,6 @@ body, html {
   transform: translateY(-1px);
 }
 
-/* Custom Scrollbar for panel */
 .ui-panel::-webkit-scrollbar {
   width: 6px;
 }
@@ -242,7 +234,6 @@ body, html {
   border-radius: 10px;
 }
 
-/* Responsive */
 @media (max-width: 480px) {
   .ui-panel {
     top: auto;

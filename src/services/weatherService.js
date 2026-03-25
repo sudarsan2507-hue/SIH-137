@@ -1,5 +1,4 @@
 export async function fetchWeather(lat, lon) {
-    // Open-Meteo is completely free and requires NO API KEY! Perfect for zero-configuration setups.
     const url = `https://api.open-meteo.com/v1/forecast?latitude=${Math.round(lat * 1000) / 1000}&longitude=${Math.round(lon * 1000) / 1000}&current=temperature_2m,relative_humidity_2m,surface_pressure,precipitation,wind_speed_10m,wind_direction_10m`;
 
     try {
@@ -10,7 +9,6 @@ export async function fetchWeather(lat, lon) {
         
         const data = await response.json();
         
-        // Map Open-Meteo schema to the existing structure expected by main.js
         return {
             main: {
                 temp: data.current.temperature_2m,

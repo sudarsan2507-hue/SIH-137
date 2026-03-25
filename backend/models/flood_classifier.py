@@ -8,15 +8,12 @@ class FloodClassifier:
         self.train_synthetic_model()
 
     def train_synthetic_model(self):
-        # Synthetic dataset: Elevation (m), Rainfall (mm/h), Distance to Water (m)
         np.random.seed(42)
         n_samples = 1000
         
         elevations = np.random.uniform(0, 50, n_samples)
         rainfall = np.random.uniform(0, 200, n_samples)
         dist_water = np.random.uniform(10, 5000, n_samples)
-        
-        # ML Rule: Low elevation + high rain + close to water = Flood Risk
         risk_score = (rainfall * 0.5) - (elevations * 2) - (dist_water * 0.01)
         labels = (risk_score > 20).astype(int)
         
@@ -26,7 +23,6 @@ class FloodClassifier:
 
     def predict_risk(self, elevation: float, rainfall: float, dist_water: float) -> float:
         X_new = pd.DataFrame({'elevation': [elevation], 'rainfall': [rainfall], 'dist_water': [dist_water]})
-        # Returns probability of class 1 (Flood)
         return self.model.predict_proba(X_new)[0][1]
 
 flood_classifier = FloodClassifier()

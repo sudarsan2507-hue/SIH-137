@@ -24,29 +24,21 @@ class RiskRequest(BaseModel):
 
 @app.post("/api/analyze-risk")
 def analyze_risk(req: RiskRequest):
-    # 1. Flood Probability using Random Forest
-    mock_elevation = (abs(req.lat) + abs(req.lon)) % 30  # 0 to 30 meters estimation
-    mock_dist_water = (abs(req.lat) * abs(req.lon)) % 2000 # 0 to 2000 meters
+    mock_elevation = (abs(req.lat) + abs(req.lon)) % 30
+    mock_dist_water = (abs(req.lat) * abs(req.lon)) % 2000
 
     flood_prob = flood_classifier.predict_risk(
         elevation=mock_elevation, 
         rainfall=req.rainfall, 
         dist_water=mock_dist_water
     )
-
-    # 2. Storm Trajectory Prediction using LSTM mock
     trajectory = storm_predictor.predict_next_vectors(
         current_lat=req.lat,
         current_lon=req.lon,
         wind_speed=req.wind_speed,
         wind_deg=req.wind_deg
     )
-
-    # 3. Overall Danger Score
     danger_score = (flood_prob * 100) + (req.wind_speed * 1.5)
-
-    # 4. Safest Evacuation Vector
-    # Wind moves TOWARDS (wind_deg - 180). We want to move perpendicular or away safely.
     safe_angle = (req.wind_deg + 90) % 360
     directions = {0: 'north', 90: 'east', 180: 'south', 270: 'west'}
     closest_dir = min(directions.keys(), key=lambda k: min(abs(k - safe_angle), 360 - abs(k - safe_angle)))
